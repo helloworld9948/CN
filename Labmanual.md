@@ -2,17 +2,13 @@
 
 ---
 
-## Experiment 1: Data Link Layer Framing
+## Experiment 1: Data Link Layer Framing Methods
 
-### Character Stuffing and Bit Stuffing
+### **Implement data link layer framing methods such as character stuffing and bit stuffing.**
 
-*Description of the experiment:*
-
-- **Character Stuffing**: This method involves inserting a special character (usually an escape character) before each instance of the special character in the data stream.
-
+- **Character Stuffing**: Involves inserting a special character before each instance of the special character in the data stream.
 
 *Sample Code:*
-
 
 ```c
 #include <stdio.h>
@@ -48,11 +44,10 @@ int main() {
     return 0;
 }
 ```
-- **Bit Stuffing**: This involves inserting a bit into the data stream to break up sequences of bits that might be interpreted as control information.
+
+- **Bit Stuffing**: Involves inserting a bit to break up sequences of bits that might be interpreted as control information.
 
 *Sample Code:*
-
-
 
 ```c
 #include <stdio.h>
@@ -96,13 +91,7 @@ int main() {
 
 ## Experiment 2: Cyclic Redundancy Check (CRC)
 
-### CRC Code Computation
-
-*Program to compute CRC codes for the following polynomials:*
-
-- CRC-12
-- CRC-16
-- CRC-CCIP
+### **Write a program to compute CRC codes for the polynomials: CRC-12, CRC-16, and CRC-CCIP.**
 
 *Sample Code:*
 
@@ -121,9 +110,7 @@ int main() {
 
 ## Experiment 3: Sliding Window Protocol
 
-### Flow Control and Loss Recovery
-
-*Program implementing sliding window protocol for flow control and Go-Back-N mechanism for loss recovery.*
+### **Develop a simple data link layer that performs flow control using the sliding window protocol and loss recovery using the Go-Back-N mechanism.**
 
 *Sample Code:*
 
@@ -163,9 +150,7 @@ int main() {
 
 ## Experiment 4: Dijkstra's Algorithm
 
-### Shortest Path Computation
-
-*Program to implement Dijkstra’s algorithm for finding the shortest path in a network.*
+### **Implement Dijkstra’s algorithm to compute the shortest path through a network.**
 
 *Refactored Code:*
 
@@ -259,9 +244,11 @@ void dijkstra(int G[MAX][MAX], int n, int startnode) {
 
 ---
 
-## Experiment 5: Obtain a Broadcast Tree for a Subnet
+## Experiment 5: Broadcast Tree for a Subnet
 
-A broadcast tree is a spanning tree that connects all nodes in a network, ensuring that broadcast messages can be transmitted efficiently to all nodes. One common approach is to use a Minimum Spanning Tree (MST) algorithm like Prim's or Kruskal's to derive this tree.
+### **Take an example subnet of hosts and obtain a broadcast tree for the subnet.**
+
+- A broadcast tree can be derived using a Minimum Spanning Tree (MST) algorithm such as Prim's Algorithm.
 
 #### Example using Prim’s Algorithm
 
@@ -321,11 +308,13 @@ int main() {
 }
 ```
 
-### Experiment 6. Implement the Distance Vector Routing Algorithm
+---
 
-The distance vector routing algorithm involves each node maintaining a table of the minimum distance to every other node and updating it based on information from its neighbors.
+## Experiment 6: Distance Vector Routing Algorithm
 
-#### Example of Distance Vector Routing
+### **Implement the distance vector routing algorithm to obtain routing tables at each node.**
+
+*Sample Code:*
 
 ```c
 #include <stdio.h>
@@ -377,13 +366,15 @@ int main() {
 }
 ```
 
-
 ---
 
-## Experiment 6: Data Encryption and Decryption
+## Experiment 7: Data Encryption and Decryption
 
-### Encryption and Decryption Technique Caesar Cipher Example
-#### Encryption
+### **Implement data encryption and decryption.**
+
+#### Encryption and Decryption using Caesar Cipher
+
+- **Encryption**
 
 ```c
 #include <stdio.h>
@@ -422,7 +413,7 @@ int main() {
 }
 ```
 
-#### Decryption
+- **Decryption**
 
 ```c
 #include <stdio.h>
@@ -460,4 +451,3 @@ int main() {
     return 0;
 }
 ```
----
