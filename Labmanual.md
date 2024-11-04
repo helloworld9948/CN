@@ -382,8 +382,82 @@ int main() {
 
 ## Experiment 6: Data Encryption and Decryption
 
-### Encryption and Decryption Techniques
+### Encryption and Decryption Technique Caesar Cipher Example
+#### Encryption
 
-*Explanation of basic encryption and decryption methods with sample code.*
+```c
+#include <stdio.h>
+#include <string.h>
 
+// Function to encrypt the plaintext using a basic Caesar Cipher
+void encrypt(char *plaintext, int shift) {
+    char ciphertext[100];
+    strcpy(ciphertext, plaintext);
+
+    for (int i = 0; i < strlen(ciphertext); i++) {
+        if (ciphertext[i] >= 'a' && ciphertext[i] <= 'z') {
+            ciphertext[i] = ((ciphertext[i] - 'a' + shift) % 26) + 'a';
+        } else if (ciphertext[i] >= 'A' && ciphertext[i] <= 'Z') {
+            ciphertext[i] = ((ciphertext[i] - 'A' + shift) % 26) + 'A';
+        }
+    }
+
+    printf("Encrypted Text: %s\n", ciphertext);
+}
+
+int main() {
+    char plaintext[100];
+    int shift;
+
+    printf("Enter the plaintext: ");
+    fgets(plaintext, sizeof(plaintext), stdin);
+    plaintext[strcspn(plaintext, "\n")] = 0; // Remove newline character
+
+    printf("Enter the shift value: ");
+    scanf("%d", &shift);
+
+    encrypt(plaintext, shift);
+
+    return 0;
+}
+```
+
+#### Decryption
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+// Function to decrypt the ciphertext using a basic Caesar Cipher
+void decrypt(char *ciphertext, int shift) {
+    char plaintext[100];
+    strcpy(plaintext, ciphertext);
+
+    for (int i = 0; i < strlen(plaintext); i++) {
+        if (plaintext[i] >= 'a' && plaintext[i] <= 'z') {
+            plaintext[i] = ((plaintext[i] - 'a' - shift + 26) % 26) + 'a';
+        } else if (plaintext[i] >= 'A' && plaintext[i] <= 'Z') {
+            plaintext[i] = ((plaintext[i] - 'A' - shift + 26) % 26) + 'A';
+        }
+    }
+
+    printf("Decrypted Text: %s\n", plaintext);
+}
+
+int main() {
+    char ciphertext[100];
+    int shift;
+
+    printf("Enter the ciphertext: ");
+    fgets(ciphertext, sizeof(ciphertext), stdin);
+    ciphertext[strcspn(ciphertext, "\n")] = 0; // Remove newline character
+
+    printf("Enter the shift value: ");
+    scanf("%d", &shift);
+
+    decrypt(ciphertext, shift);
+
+    return 0;
+}
+```
 ---
