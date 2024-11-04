@@ -9,7 +9,88 @@
 *Description of the experiment:*
 
 - **Character Stuffing**: This method involves inserting a special character (usually an escape character) before each instance of the special character in the data stream.
+
+
+*Sample Code:*
+
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+void characterStuffing(char* input, char* stuffed) {
+    char flag = 'F';  // Example flag character
+    char esc = 'E';   // Example escape character
+    int j = 0;
+    
+    stuffed[j++] = flag;  // Start with the flag character
+    
+    for (int i = 0; i < strlen(input); i++) {
+        if (input[i] == flag || input[i] == esc) {
+            stuffed[j++] = esc;  // Add escape character before any flag or escape character
+        }
+        stuffed[j++] = input[i];
+    }
+    
+    stuffed[j++] = flag;  // End with the flag character
+    stuffed[j] = '\0';    // Null-terminate the string
+}
+
+int main() {
+    char input[] = "ABCDEF";
+    char stuffed[50];
+    
+    characterStuffing(input, stuffed);
+    
+    printf("Original Data: %s\n", input);
+    printf("Stuffed Data: %s\n", stuffed);
+    
+    return 0;
+}
+```
 - **Bit Stuffing**: This involves inserting a bit into the data stream to break up sequences of bits that might be interpreted as control information.
+
+*Sample Code:*
+
+
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+void bitStuffing(char* input, char* stuffed) {
+    int count = 0, j = 0;
+    
+    for (int i = 0; i < strlen(input); i++) {
+        if (input[i] == '1') {
+            count++;
+        } else {
+            count = 0;
+        }
+        
+        stuffed[j++] = input[i];
+        
+        if (count == 5) {  // After five consecutive 1s, insert a 0
+            stuffed[j++] = '0';
+            count = 0;
+        }
+    }
+    
+    stuffed[j] = '\0';  // Null-terminate the string
+}
+
+int main() {
+    char input[] = "1111101111101111110";
+    char stuffed[50];
+    
+    bitStuffing(input, stuffed);
+    
+    printf("Original Data: %s\n", input);
+    printf("Stuffed Data: %s\n", stuffed);
+    
+    return 0;
+}
+```
 
 ---
 
