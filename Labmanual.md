@@ -451,3 +451,66 @@ int main() {
     return 0;
 }
 ```
+
+**"XOR Cipher Implementation for Data Encryption and Decryption"**
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void encrypt(const char *plain, const char *key, char *cipher) {
+    int lp = strlen(key);
+    for (int i = 0; plain[i] != '\0'; i++) {
+        cipher[i] = plain[i] ^ lp; // XOR operation with key length
+    }
+    cipher[strlen(plain)] = '\0'; // Null-terminate the cipher
+}
+
+void decrypt(const char *cipher, int keyLength, char *plain) {
+    for (int i = 0; cipher[i] != '\0'; i++) {
+        plain[i] = cipher[i] ^ keyLength; // XOR operation with key length
+    }
+    plain[strlen(cipher)] = '\0'; // Null-terminate the plain text
+}
+
+int main() {
+    char cipher[50], plain[50], key[50];
+
+    while (1) {
+        int choice;
+        printf("\n----- MENU -----\n");
+        printf("1: Data Encryption\n");
+        printf("2: Data Decryption\n");
+        printf("3: Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1: {
+                printf("Data Encryption\n");
+                printf("Enter the plain text: ");
+                scanf("%s", plain);
+                printf("Enter the encryption key: ");
+                scanf("%s", key);
+                encrypt(plain, key, cipher);
+                printf("The encrypted text is: %s\n", cipher);
+                break;
+            }
+            case 2: {
+                printf("Data Decryption\n");
+                int keyLength = strlen(key);
+                decrypt(cipher, keyLength, plain);
+                printf("Decrypted text is: %s\n", plain);
+                break;
+            }
+            case 3:
+                exit(0);
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+
+    return 0;
+}
+```
