@@ -250,63 +250,85 @@ void dijkstra(int G[MAX][MAX], int n, int startnode) {
 
 - A broadcast tree can be derived using a Minimum Spanning Tree (MST) algorithm such as Prim's Algorithm.
 
-#### Example using Prim’s Algorithm
-
 ```c
 #include <stdio.h>
-#include <limits.h>
 
-#define V 5  // Number of vertices in the graph
+#define MAX_NODES 50
+#define INF 99
 
-int minKey(int key[], int mstSet[]) {
-    int min = INT_MAX, min_index;
-    for (int v = 0; v < V; v++)
-        if (mstSet[v] == 0 && key[v] < min)
-            min = key[v], min_index = v;
-    return min_index;
-}
+int n;
+int mincost = 0;
+int edge[MAX_NODES][MAX_NODES];
+int parent[MAX_NODES];
+int t[MAX_NODES][2];
 
-void printMST(int parent[], int n, int graph[V][V]) {
-    printf("Edge \tWeight\n");
-    for (int i = 1; i < V; i++)
-        printf("%d - %d \t%d \n", parent[i], i, graph[i][parent[i]]);
-}
-
-void primMST(int graph[V][V]) {
-    int parent[V];
-    int key[V];
-    int mstSet[V];
-
-    for (int i = 0; i < V; i++)
-        key[i] = INT_MAX, mstSet[i] = 0;
-
-    key[0] = 0;
-    parent[0] = -1;
-
-    for (int count = 0; count < V - 1; count++) {
-        int u = minKey(key, mstSet);
-        mstSet[u] = 1;
-
-        for (int v = 0; v < V; v++)
-            if (graph[u][v] && mstSet[v] == 0 && graph[u][v] < key[v])
-                parent[v] = u, key[v] = graph[u][v];
-    }
-
-    printMST(parent, V, graph);
-}
+int find(int l);
+void sunion(int l, int m);
 
 int main() {
-    int graph[V][V] = {{0, 2, 0, 6, 0},
-                       {2, 0, 3, 8, 5},
-                       {0, 3, 0, 0, 7},
-                       {6, 8, 0, 0, 9},
-                       {0, 5, 7, 9, 0}};
+    int i, j, u, v, min, p, q;
 
-    primMST(graph);
+    printf("\nEnter the number of nodes: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("%c\t", 65 + i);
+        parent[i] = -1;
+    }
+
+    printf("\n");
+
+    for (i = 0; i < n; i++) {
+        printf("%c: ", 65 + i);
+        for (j = 0; j < n; j++) {
+            scanf("%d", &edge[i][j]);
+        }
+    }
+
+    for (i = 0; i < n; i++) {
+        min = INF;
+        for (j = 0; j < n; j++) {
+            if (edge[i][j] != INF && edge[i][j] < min) {
+                min = edge[i][j];
+                u = i;
+                v = j;
+            }
+        }
+        p = find(u);
+        q = find(v);
+        if (p != q) {
+            t[i][0] = u;
+            t[i][1] = v;
+            mincost += edge[u][v];
+            sunion(p, q);
+        } else {
+            t[i][0] = -1;
+            t[i][1] = -1;
+        }
+    }
+
+    printf("Minimum cost is %d\nMinimum spanning tree is:\n", mincost);
+    for (i = 0; i < n; i++) {
+        if (t[i][0] != -1 && t[i][1] != -1) {
+            printf("%c %c %d\n", 65 + t[i][0], 65 + t[i][1], edge[t[i][0]][t[i][1]]);
+        }
+    }
 
     return 0;
 }
+
+void sunion(int l, int m) {
+    parent[l] = m;
+}
+
+int find(int l) {
+    if (parent[l] > 0) {
+        l = parent[l];
+    }
+    return l;
+}
 ```
+
 
 ---
 
